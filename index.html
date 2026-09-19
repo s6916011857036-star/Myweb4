@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achayanee Jeansiri - 8-Bit Retro Arcade Personal Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🕹️</text></svg>">
+</head>
+<body>
+
+  <!-- Retro Background Decoration (Floating 8-Bit Stars & Grid) -->
+  <div class="retro-bg-decoration">
+    <div class="pixel-grid"></div>
+    <div class="floating-star s1"></div>
+    <div class="floating-star s2"></div>
+    <div class="floating-star s3"></div>
+    <div class="floating-star s4"></div>
+    <div class="floating-star s5"></div>
+  </div>
+
+  <!-- =========================================================
+       SPLASH SCREEN (Activated on First Load & Browser Refresh)
+       ========================================================= -->
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-decorations">
+      <div class="floating-star s1"></div>
+      <div class="floating-star s2"></div>
+      <div class="floating-star s3"></div>
+      <div class="floating-star s4"></div>
+    </div>
+
+    <div class="splash-arcade-cabinet">
+      <div class="splash-badge">★ RETRO ARCADE PORTFOLIO SYSTEM ★</div>
+      <h1 class="splash-title">ACHAYANEE JEANSIRI</h1>
+      <div class="splash-subtitle">อัชญานีย์ เจียรศิริ | KRU UTHAI NIELLOWARE</div>
+
+      <div class="splash-avatar-box">
+        <img src="assets/images/profile.jpg" alt="Achayanee Jeansiri Profile" class="splash-avatar">
+      </div>
+
+      <div class="splash-loading-bar-outer">
+        <div id="splash-progress-bar" class="splash-loading-bar-inner"></div>
+      </div>
+
+      <div id="splash-status" class="splash-status-text">INITIALIZING 8-BIT SYSTEM... [0%]</div>
+
+      <button id="splash-start-btn" class="splash-start-btn" style="display: none;">
+        ► INSERT COIN / PRESS START ◄
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TOP ARCADE GAME HUD & NAVIGATION
+       ========================================================= -->
+  <header class="arcade-header">
+    <div class="hud-top-bar">
+      <!-- Player Info -->
+      <div class="hud-player-info">
+        <span class="hud-player-tag">1P</span>
+        <span class="hud-player-name">ACHAYANEE JEANSIRI</span>
+        <span style="color: var(--text-muted); font-size: 9px;">[LV. 99 MD]</span>
+      </div>
+
+      <!-- Health & Mana Meters -->
+      <div class="hud-stats">
+        <div class="hud-meter meter-hp">
+          <span class="meter-label">HP</span>
+          <div class="meter-bar">
+            <div class="meter-fill hp"></div>
+          </div>
+          <span style="color: #fff; font-size: 9px;">100/100</span>
+        </div>
+
+        <div class="hud-meter meter-mp">
+          <span class="meter-label">MP</span>
+          <div class="meter-bar">
+            <div class="meter-fill mp"></div>
+          </div>
+          <span style="color: #fff; font-size: 9px;">100/100</span>
+        </div>
+
+        <div class="hud-meter meter-coin">
+          <span class="meter-label">COINS</span>
+          <span style="color: var(--coin-yellow); font-size: 10px;">★ 999,999</span>
+        </div>
+      </div>
+
+      <!-- Actions & Audio Toggle -->
+      <div class="hud-actions">
+        <button id="sound-toggle-btn" class="pixel-btn-icon" title="Toggle 8-bit sound effects">
+          🔊 SFX: ON
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Arcade Navigation Tabs -->
+    <nav class="arcade-nav-container">
+      <ul class="arcade-nav-list">
+        <li class="nav-item">
+          <button class="arcade-nav-btn active" data-target="section-overview">
+            🎮 ภาพรวม (OVERVIEW)
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="arcade-nav-btn" data-target="section-education">
+            🎓 1. ประวัติการศึกษา
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="arcade-nav-btn" data-target="section-contact">
+            📍 2. สถานที่ติดต่อ
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="arcade-nav-btn" data-target="section-achievements">
+            🏆 3. ผลงานโดดเด่น
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="arcade-nav-btn" data-target="section-gallery">
+            📜 แกลเลอรีเอกสาร (PAGES 1-7)
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- =========================================================
+       MAIN CONTENT VIEWPORT
+       ========================================================= -->
+  <main class="main-viewport">
+
+    <!-- TAB 0: ภาพรวม (OVERVIEW & PROFILE) -->
+    <section id="section-overview" class="tab-section active">
+      <div class="pixel-card">
+        <div class="pixel-card-header">
+          <div class="pixel-card-title">
+            <span>►</span> ข้อมูลบุคคลและประวัติโดยย่อ (CHARACTER PROFILE)
+          </div>
+          <div class="pixel-card-tag">MANAGING DIRECTOR</div>
+        </div>
+
+        <div class="hero-arcade-grid">
+          <!-- Left Column: Pixel Framed Profile -->
+          <div class="profile-card-col">
+            <div class="profile-photo-frame">
+              <img src="assets/images/profile.jpg" alt="Achayanee Jeansiri" class="profile-photo">
+              <div class="profile-level-badge">PLAYER 1 ★ LV.99</div>
+            </div>
+            <button class="pixel-btn-action secondary" onclick="openImageModal('assets/images/profile.jpg', 'รูปภาพประจำตัว คุณอัชญานีย์ เจียรศิริ')">
+              🔍 ซูมรูปโปรไฟล์
+            </button>
+          </div>
+
+          <!-- Right Column: Biography & Stats -->
+          <div class="hero-content">
+            <h1>ACHAYANEE JEANSIRI</h1>
+            <div class="hero-subtitle">คุณอัชญานีย์ เจียรศิริ | กรรมการผู้จัดการ ครูอุทัยเครื่องถม</div>
+
+            <p style="font-size: 15px; color: #f1f5f9; margin-bottom: 12px;">
+              ผู้บริหารที่มีความเชี่ยวชาญด้านการบริหารธุรกิจ การขาย การดูแลลูกค้าคนสำคัญ การนำเสนอผลิตภัณฑ์
+              และการบริหารงานจัดแสดงสินค้าในอุตสาหกรรม <strong>ศิลปหัตถกรรมไทย (เครื่องถม)</strong>
+              พร้อมทั้งมีประสบการณ์เป็นผู้ประกอบการทั้งธุรกิจหน้าร้านและออนไลน์
+            </p>
+
+            <div class="hero-quote-box">
+              "Preserving Thai Traditional Craftsmanship with Passion and Integrity"<br>
+              <small style="color: var(--coin-yellow);">— สืบสานงานศิลปหัตถกรรมเครื่องถมไทยด้วยความมุ่งมั่นและซื่อสัตย์</small>
+            </div>
+
+            <!-- Arcade Stats Grid -->
+            <div class="hero-stats-grid">
+              <div class="stat-box">
+                <div class="stat-number">OTOP 5★</div>
+                <div class="stat-desc">ครูอุทัยเครื่องถม</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">300+</div>
+                <div class="stat-desc">แก้ว/วัน (Grass Jelly)</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">1st PLACE</div>
+                <div class="stat-desc">แชมป์วิ่ง 2 สนาม</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">ROYAL</div>
+                <div class="stat-desc">ถวายงาน ร.10</div>
+              </div>
+            </div>
+
+            <!-- Quick Action Shortcuts -->
+            <div class="hero-actions">
+              <button class="pixel-btn-action primary" onclick="switchTab('section-education')">
+                🎓 ดูประวัติการศึกษา
+              </button>
+              <button class="pixel-btn-action secondary" onclick="switchTab('section-contact')">
+                📍 ดูสถานที่ติดต่อ
+              </button>
+              <button class="pixel-btn-action accent" onclick="switchTab('section-achievements')">
+                🏆 ดูผลงานโดดเด่น
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 1: 1. ประวัติการศึกษา (EDUCATION HISTORY)
+         ========================================================= -->
+    <section id="section-education" class="tab-section">
+      <div class="pixel-card">
+        <div class="pixel-card-header">
+          <div class="pixel-card-title">
+            <span>🎓</span> 1. ประวัติการศึกษา (EDUCATION BACKGROUND)
+          </div>
+          <div class="pixel-card-tag">ACADEMIC TREE</div>
+        </div>
+
+        <p style="margin-bottom: 20px; color: #cbd5e1; font-size: 14.5px;">
+          เส้นทางการศึกษาและการสะสมองค์ความรู้เพื่อประยุกต์ใช้ในการเป็นผู้ประกอบการและการบริหารธุรกิจหัตถศิลป์ไทย
+        </p>
+
+        <!-- Education Level Cards -->
+        <div class="edu-grid">
+          <!-- Master's Degree -->
+          <div class="edu-card">
+            <span class="edu-level-badge master">LEVEL 3: MASTER'S DEGREE</span>
+            <div class="edu-degree-title">ปริญญาโท (Master's Degree)</div>
+            <div class="edu-school-name">ระดับบัณฑิตศึกษา (Graduate Studies)</div>
+            <ul class="edu-details-list">
+              <li><strong>สาขาวิชา:</strong> ด้านการบริหารธุรกิจและการจัดการ</li>
+              <li><strong>ความเชี่ยวชาญ:</strong> Strategic Management & Entrepreneurship</li>
+              <li><strong>การประยุกต์ใช้:</strong> ต่อยอดและยกระดับแบรนด์ครูอุทัยเครื่องถมสู่ตลาดสากล</li>
+            </ul>
+          </div>
+
+          <!-- Bachelor's Degree -->
+          <div class="edu-card">
+            <span class="edu-level-badge bachelor">LEVEL 2: BACHELOR'S DEGREE</span>
+            <div class="edu-degree-title">ปริญญาตรี (Bachelor's Degree)</div>
+            <div class="edu-school-name">ระดับอุดมศึกษา (Undergraduate Studies)</div>
+            <ul class="edu-details-list">
+              <li><strong>สาขาวิชา:</strong> ด้านการบริหารธุรกิจ / พาณิชยศาสตร์</li>
+              <li><strong>พื้นฐานทักษะ:</strong> การเงิน, การตลาด, และการบริหารจัดการองค์กร</li>
+              <li><strong>กิจกรรม:</strong> ผู้นำกิจกรรมนักศึกษาและการแข่งขันโครงการธุรกิจ</li>
+            </ul>
+          </div>
+
+          <!-- Secondary Education -->
+          <div class="edu-card">
+            <span class="edu-level-badge highschool">LEVEL 1: SECONDARY EDUCATION</span>
+            <div class="edu-degree-title">มัธยมศึกษา (Secondary Education)</div>
+            <div class="edu-school-name">โรงเรียนมัธยมศึกษาชั้นนำ</div>
+            <ul class="edu-details-list">
+              <li><strong>แผนการเรียน:</strong> พื้นฐานวิชาการเข้มข้น</li>
+              <li><strong>ทักษะเด่น:</strong> กิจกรรมกีฬา การสื่อสาร และความเป็นผู้นำ</li>
+              <li><strong>จุดเริ่มต้น:</strong> ปลูกฝังวินัยและความมุ่งมั่นสู่ความสำเร็จ</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Document Reference Box for Page 2 -->
+        <div style="background: #151722; border: 3px solid #000; padding: 16px; margin: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="font-family: var(--font-pixel); font-size: 11px; color: var(--coin-yellow); margin-bottom: 4px;">
+              📄 เอกสารอ้างอิง: แบบรายงานประวัติการศึกษา (PAGE 01)
+            </div>
+            <div style="font-size: 13px; color: #94a3b8;">
+              สามารถกดดูภาพเอกสารต้นฉบับความละเอียดสูงของหน้าประวัติและคุณสมบัติ
+            </div>
+          </div>
+          <button class="pixel-btn-action secondary" onclick="openImageModal('assets/images/page-2.png', 'เอกสารหน้า 2: About Me & Education')">
+            🔍 เปิดดูภาพต้นฉบับ PAGE-2
+          </button>
+        </div>
+
+        <!-- Personal Strengths / RPG Skill Bars -->
+        <div style="margin-top: 24px;">
+          <div style="font-family: var(--font-pixel); font-size: 13px; color: var(--arcade-cyan); margin-bottom: 12px;">
+            ⚡ PERSONAL STRENGTHS & STATS (จุดแข็งและทักษะเฉพาะตัว)
+          </div>
+          <div class="strengths-grid">
+            <div class="strength-item">
+              <div class="strength-header">
+                <span class="strength-name">🤝 RESPONSIBILITY (ความรับผิดชอบ)</span>
+                <span class="strength-val">MAX 100%</span>
+              </div>
+              <div class="pixel-progress-bar">
+                <div class="pixel-progress-fill" style="width: 100%;"></div>
+              </div>
+            </div>
+
+            <div class="strength-item">
+              <div class="strength-header">
+                <span class="strength-name">👁️ ATTENTION TO DETAIL (ความละเอียดรอบคอบ)</span>
+                <span class="strength-val">MAX 100%</span>
+              </div>
+              <div class="pixel-progress-bar">
+                <div class="pixel-progress-fill" style="width: 98%;"></div>
+              </div>
+            </div>
+
+            <div class="strength-item">
+              <div class="strength-header">
+                <span class="strength-name">📖 LEARNING MINDSET (พร้อมเรียนรู้)</span>
+                <span class="strength-val">MAX 100%</span>
+              </div>
+              <div class="pixel-progress-bar">
+                <div class="pixel-progress-fill" style="width: 100%;"></div>
+              </div>
+            </div>
+
+            <div class="strength-item">
+              <div class="strength-header">
+                <span class="strength-name">💬 COMMUNICATION (การสื่อสาร)</span>
+                <span class="strength-val">MAX 100%</span>
+              </div>
+              <div class="pixel-progress-bar">
+                <div class="pixel-progress-fill" style="width: 96%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 2: 2. สถานที่ติดต่อ (CONTACT INFORMATION)
+         ========================================================= -->
+    <section id="section-contact" class="tab-section">
+      <div class="pixel-card">
+        <div class="pixel-card-header">
+          <div class="pixel-card-title">
+            <span>📍</span> 2. สถานที่ติดต่อและช่องทางการติดต่อ (CONTACT TERMINAL)
+          </div>
+          <div class="pixel-card-tag">NPC DIALOGUE</div>
+        </div>
+
+        <div class="contact-layout-grid">
+          <!-- Left: Contact Details Cards -->
+          <div class="contact-info-block">
+            <div class="contact-tile">
+              <div class="contact-tile-icon">🏢</div>
+              <div class="contact-tile-text">
+                <h4>สถานที่ติดต่อ / สำนักงานทำการ</h4>
+                <p>
+                  <strong>บริษัทครูอุทัยนิเอลโลแวร์ จำกัด</strong><br>
+                  ศูนย์การค้าและหัตถศิลป์เครื่องถมไทย นครศรีธรรมราช & ศูนย์จัดแสดงสินค้า กรุงเทพมหานคร
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-tile">
+              <div class="contact-tile-icon">📞</div>
+              <div class="contact-tile-text">
+                <h4>เบอร์โทรศัพท์ติดต่อ (PHONE)</h4>
+                <p>
+                  <strong><a href="tel:0993359573" style="color: var(--coin-yellow); text-decoration: none;">0993359573</a></strong> / ติดต่อฝ่ายบริหารและลูกค้าสัมพันธ์<br>
+                  <small style="color: var(--text-muted);">(พร้อมให้บริการประสานงานด้านธุรกิจและสั่งทำเครื่องถม)</small>
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-tile">
+              <div class="contact-tile-icon">✉️</div>
+              <div class="contact-tile-text">
+                <h4>อีเมลติดต่อ (EMAIL)</h4>
+                <p>
+                  <strong><a href="mailto:Kruuthainielloware@gmail.com" style="color: var(--coin-yellow); text-decoration: none;">Kruuthainielloware@gmail.com</a></strong>
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-tile">
+              <div class="contact-tile-icon">🌐</div>
+              <div class="contact-tile-text">
+                <h4>โซเชียลมีเดีย (SOCIAL CHANNELS)</h4>
+                <p>
+                  <strong>Facebook:</strong> เครื่องถมครูอุทัย - KruUthai Nieillo<br>
+                  <strong>Line:</strong> dw.dew<br>
+                  <strong>Instagram:</strong> kruuthai_nieillo
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive 8-bit Quest / Message Form -->
+          <div class="contact-form-block">
+            <div style="font-family: var(--font-pixel); font-size: 11px; color: var(--coin-yellow); margin-bottom: 12px;">
+              ✉️ ส่งข้อความติดต่อ / ฝากภารกิจ (LEAVE A MESSAGE)
+            </div>
+
+            <form id="arcade-contact-form">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">ชื่อ-นามสกุล / บริษัทผู้ติดต่อ:</label>
+                <input type="text" id="contact-name" class="pixel-input" placeholder="ระบุชื่อของท่าน..." required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-email">อีเมล / เบอร์โทรศัพท์กลับ:</label>
+                <input type="text" id="contact-email" class="pixel-input" placeholder="example@domain.com หรือเบอร์โทร..." required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-subject">หัวข้อเรื่องที่ต้องการติดต่อ:</label>
+                <select id="contact-subject" class="pixel-input">
+                  <option>สั่งผลิตงานหัตถศิลป์เครื่องถม (Custom Nielloware)</option>
+                  <option>ประสานงานออกบูธ / งานแสดงสินค้า (Exhibition)</option>
+                  <option>ติดต่อด้านธุรกิจ / การเป็นวิทยากร (Business Inquiries)</option>
+                  <option>อื่นๆ (General Messages)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-msg">รายละเอียดข้อความ:</label>
+                <textarea id="contact-msg" class="pixel-textarea" placeholder="พิมพ์ข้อความของท่านที่นี่..." required></textarea>
+              </div>
+
+              <button type="submit" class="form-submit-btn">
+                ► SEND MESSAGE [EXP +100] ◄
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 3: 3. ผลงานโดดเด่น (OUTSTANDING ACHIEVEMENTS)
+         ========================================================= -->
+    <section id="section-achievements" class="tab-section">
+      <div class="pixel-card">
+        <div class="pixel-card-header">
+          <div class="pixel-card-title">
+            <span>🏆</span> 3. ผลงานโดดเด่นและประสบการณ์ทรงคุณค่า (ACHIEVEMENT QUESTS)
+          </div>
+          <div class="pixel-card-tag">TROPHY ROOM</div>
+        </div>
+
+        <!-- Special Quest Banner: Royal Presentation -->
+        <div class="quest-banner">
+          <div class="quest-badge">👑 ROYAL ACHIEVEMENT</div>
+          <div style="flex: 1;">
+            <h3 style="color: var(--coin-yellow); font-size: 16px; margin-bottom: 4px;">
+              โอกาสอันทรงเกียรติ ถวายงานในหลวงรัชกาลที่ 10
+            </h3>
+            <p style="font-size: 13.5px; color: #e2e8f0;">
+              มีโอกาสมีส่วนร่วมในกระบวนการผลิตและเตรียมผลิตภัณฑ์เครื่องถมอันประณีตงดงาม
+              เพื่อทูลเกล้าฯ ถวายพระบาทสมเด็จพระวชิรเกล้าเจ้าอยู่หัว รัชกาลที่ 10
+              ตอกย้ำถึงความเชี่ยวชาญด้านงานฝีมือ ศิลปวัฒนธรรม และมาตรฐานระดับสูงสุด
+            </p>
+          </div>
+          <button class="pixel-btn-action primary" onclick="openImageModal('assets/images/page-4.png', 'หน้า 4 - Nielloware & Royal Presentation')">
+            🔍 ดูเอกสารหน้า 4
+          </button>
+        </div>
+
+        <!-- Achievement Cards Grid -->
+        <div class="achievements-grid">
+          <!-- Card 1: VIP Clients -->
+          <div class="achievement-card highlight">
+            <div>
+              <div class="achievement-top">
+                <div class="achievement-icon-box">🤝</div>
+                <div class="achievement-title-wrap">
+                  <h3>การดูแลลูกค้าระดับ VIP</h3>
+                  <div class="achievement-subtitle">IMPORTANT & REGULAR CUSTOMERS</div>
+                </div>
+              </div>
+              <div class="achievement-body">
+                มีประสบการณ์ในการดูแลและให้บริการลูกค้าคนสำคัญระดับประเทศ อาทิเช่น
+                <strong>นายอนุทิน ชาญวีรกูล และภริยา</strong>
+                สร้างความไว้วางใจในการนำเสนอและออกแบบเครื่องถมทรงคุณค่า
+              </div>
+            </div>
+            <div class="achievement-tags">
+              <span class="pixel-pill">CUSTOMER SERVICE</span>
+              <span class="pixel-pill">TRUST</span>
+              <span class="pixel-pill">HIGH PROFILE</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Managing Kru Uthai Nielloware -->
+          <div class="achievement-card">
+            <div>
+              <div class="achievement-top">
+                <div class="achievement-icon-box">🏛️</div>
+                <div class="achievement-title-wrap">
+                  <h3>บริหาร ครูอุทัยเครื่องถม</h3>
+                  <div class="achievement-subtitle">MANAGING DIRECTOR ROLE</div>
+                </div>
+              </div>
+              <div class="achievement-body">
+                บริหารจัดการงานขาย การออกบูธงานแสดงสินค้า OTOP ระดับประเทศ
+                การจัดหาวัตถุดิบเงินและทองคำแท้สำหรับการผลิต
+                การคำนวณต้นทุน และการควบคุมคุณภาพงานหัตถศิลป์ให้ได้มาตรฐานสูงสุด
+              </div>
+            </div>
+            <div class="achievement-tags">
+              <span class="pixel-pill">MANAGEMENT</span>
+              <span class="pixel-pill">OTOP EXHIBITION</span>
+              <span class="pixel-pill">PROCUREMENT</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Grass Jelly Business -->
+          <div class="achievement-card">
+            <div>
+              <div class="achievement-top">
+                <div class="achievement-icon-box">🥤</div>
+                <div class="achievement-title-wrap">
+                  <h3>ธุรกิจร้านเฉาก๊วย (Grass Jelly)</h3>
+                  <div class="achievement-subtitle">ENTREPRENEURSHIP • 300+ CUPS/DAY</div>
+                </div>
+              </div>
+              <div class="achievement-body">
+                ก่อตั้งและบริหารธุรกิจส่วนตัวประเภทร้านเครื่องดื่ม/ของหวาน
+                มียอดจำหน่ายเฉลี่ยสูงถึง <strong>300+ แก้วต่อวัน</strong>
+                ควบคุมกระบวนการตั้งแต่การวางแผน จัดหาวัตถุดิบ การผลิตหน้าร้าน และการบริการลูกค้า
+              </div>
+            </div>
+            <div class="achievement-tags">
+              <span class="pixel-pill">300+ CUPS/DAY</span>
+              <span class="pixel-pill">RETAIL</span>
+              <span class="pixel-pill">COST CONTROL</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Online Retail Business -->
+          <div class="achievement-card">
+            <div>
+              <div class="achievement-top">
+                <div class="achievement-icon-box">📦</div>
+                <div class="achievement-title-wrap">
+                  <h3>ธุรกิจร้านค้าออนไลน์ (Online Retail)</h3>
+                  <div class="achievement-subtitle">E-COMMERCE • 10+ PAIRS/DAY</div>
+                </div>
+              </div>
+              <div class="achievement-body">
+                บริหารร้านค้าบนแพลตฟอร์มดิจิทัล มียอดจำหน่ายเฉลี่ย <strong>10+ คู่ต่อวัน</strong>
+                เชี่ยวชาญการทำคอนเทนต์การตลาด การจัดการออเดอร์ การแพ็คสินค้า
+                และการจัดส่งที่รวดเร็ว พร้อมบริการหลังการขาย
+              </div>
+            </div>
+            <div class="achievement-tags">
+              <span class="pixel-pill">E-COMMERCE</span>
+              <span class="pixel-pill">CONTENT MARKETING</span>
+              <span class="pixel-pill">LOGISTICS</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Sports 1st Place Champion 11.5KM -->
+          <div class="achievement-card highlight">
+            <div>
+              <div class="achievement-top">
+                <div class="achievement-icon-box">🥇</div>
+                <div class="achievement-title-wrap">
+                  <h3>ชนะเลิศอันดับ 1 วิ่งกรมราชทัณฑ์</h3>
+                  <div class="achievement-subtitle">1st PLACE • DISTANCE 11.5 KM</div>
+                </div>
+              </div>
+              <div class="achievement-body">
+                คว้าชัยชนะเลิศอันดับที่ 1 ในการแข่งขันวิ่งมินิมาราธอน กรมราชทัณฑ์
+                ระยะทาง 11.5 กิโลเมตร (กลุ่มอายุ 20-29 ปี) สะท้อนถึงระเบียบวินัย ความอดทน
+                และการมุ่งมั่นพัฒนาศักยภาพอย่างต่อเนื่อง
+              </div>
+            </div>
+            <div class="achievement-tags">
+              <span class="pixel-pill">CHAMPION</span>
+              <span class="pixel-pill">11.5 KM</span>
+              <span class="pixel-pill">DISCIPLINE</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Sports 1st Place KMUTNB 5KM -->
+          <div class="achievement-card highlight">
+            <div>
+              <div class="achievement-top">
+                <div class="achievement-icon-box">🥇</div>
+                <div class="achievement-title-wrap">
+                  <h3>ชนะเลิศอันดับ 1 วิ่ง มจพ.</h3>
+                  <div class="achievement-subtitle">1st PLACE • KMUTNB RUNNING EVENT (5 KM)</div>
+                </div>
+              </div>
+              <div class="achievement-body">
+                คว้าอันดับที่ 1 ในการแข่งขันวิ่ง มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ
+                ระยะทาง 5 กิโลเมตร สะท้อนถึงพลังความมุ่งมั่นและความพร้อมทั้งร่างกายและจิตใจ
+              </div>
+            </div>
+            <div class="achievement-tags">
+              <span class="pixel-pill">1st PLACE</span>
+              <span class="pixel-pill">5 KM RUN</span>
+              <span class="pixel-pill">ENDURANCE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nielloware 7 Steps Process Overview -->
+        <div style="margin-top: 30px; background: #181a26; border: var(--pixel-border); padding: 20px;">
+          <div style="font-family: var(--font-pixel); font-size: 12px; color: var(--coin-yellow); margin-bottom: 12px;">
+            🛠️ กระบวนการผลิตเครื่องถมไทย 7 ขั้นตอน (NIELLOWARE PRODUCTION PROCESS)
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; text-align: center;">
+            <div style="background: #242738; border: 2px solid #000; padding: 10px;">
+              <div style="color: var(--arcade-cyan); font-weight: bold; font-size: 12px;">1. PREPARATION</div>
+              <div style="font-size: 11px; color: #cbd5e1;">เตรียมชิ้นงาน/วัสดุ</div>
+            </div>
+            <div style="background: #242738; border: 2px solid #000; padding: 10px;">
+              <div style="color: var(--arcade-cyan); font-weight: bold; font-size: 12px;">2. FORMING</div>
+              <div style="font-size: 11px; color: #cbd5e1;">ขึ้นรูปชิ้นงาน</div>
+            </div>
+            <div style="background: #242738; border: 2px solid #000; padding: 10px;">
+              <div style="color: var(--arcade-cyan); font-weight: bold; font-size: 12px;">3. SURFACE PREP</div>
+              <div style="font-size: 11px; color: #cbd5e1;">ปรับแต่งพื้นผิว</div>
+            </div>
+            <div style="background: #242738; border: 2px solid #000; padding: 10px;">
+              <div style="color: var(--arcade-cyan); font-weight: bold; font-size: 12px;">4. PATTERN</div>
+              <div style="font-size: 11px; color: #cbd5e1;">สร้างและแกะสลักลาย</div>
+            </div>
+            <div style="background: #242738; border: 2px solid #000; padding: 10px;">
+              <div style="color: var(--arcade-cyan); font-weight: bold; font-size: 12px;">5. NIELLO</div>
+              <div style="font-size: 11px; color: #cbd5e1;">ลงเนื้อยาถม</div>
+            </div>
+            <div style="background: #242738; border: 2px solid #000; padding: 10px;">
+              <div style="color: var(--arcade-cyan); font-weight: bold; font-size: 12px;">6. FINISHING</div>
+              <div style="font-size: 11px; color: #cbd5e1;">ขัดแต่งและเก็บงาน</div>
+            </div>
+            <div style="background: #242738; border: 2px solid #000; padding: 10px;">
+              <div style="color: var(--arcade-cyan); font-weight: bold; font-size: 12px;">7. INSPECTION</div>
+              <div style="font-size: 11px; color: #cbd5e1;">ตรวจสอบคุณภาพ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 4: แกลเลอรีเอกสารและภาพประกอบ (DOCUMENT GALLERY)
+         ========================================================= -->
+    <section id="section-gallery" class="tab-section">
+      <div class="pixel-card">
+        <div class="pixel-card-header">
+          <div class="pixel-card-title">
+            <span>📜</span> แกลเลอรีเอกสารผลงานต้นฉบับ (ORIGINAL PORTFOLIO PAGES 1 - 7)
+          </div>
+          <div class="pixel-card-tag">FULL ARCHIVE</div>
+        </div>
+
+        <p style="margin-bottom: 20px; color: #cbd5e1; font-size: 14.5px;">
+          รวบรวมไฟล์ภาพต้นฉบับทั้ง 7 หน้าและรูปภาพประจำตัว สามารถคลิกที่ภาพเพื่อเปิดดูความละเอียดสูงแบบ Interactive Lightbox
+        </p>
+
+        <div class="gallery-grid">
+          <!-- Page 1 -->
+          <div class="gallery-card" onclick="openImageModal('assets/images/page-1.png', 'หน้า 1: Curriculum Vitae Cover')">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/page-1.png" alt="CV Cover" class="gallery-thumb">
+            </div>
+            <div class="gallery-card-info">
+              <span class="gallery-card-title">หน้า 1: ปกแฟ้มสะสมผลงาน</span>
+              <span class="gallery-card-badge">COVER</span>
+            </div>
+          </div>
+
+          <!-- Page 2 -->
+          <div class="gallery-card" onclick="openImageModal('assets/images/page-2.png', 'หน้า 2: About Me, Education & Contact')">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/page-2.png" alt="About Me" class="gallery-thumb">
+            </div>
+            <div class="gallery-card-info">
+              <span class="gallery-card-title">หน้า 2: การศึกษา & ติดต่อ</span>
+              <span class="gallery-card-badge">PROFILE</span>
+            </div>
+          </div>
+
+          <!-- Page 3 -->
+          <div class="gallery-card" onclick="openImageModal('assets/images/page-3.png', 'หน้า 3: Professional Work Experience')">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/page-3.png" alt="Work Experience" class="gallery-thumb">
+            </div>
+            <div class="gallery-card-info">
+              <span class="gallery-card-title">หน้า 3: ประสบการณ์ทำงาน</span>
+              <span class="gallery-card-badge">EXPERIENCE</span>
+            </div>
+          </div>
+
+          <!-- Page 4 -->
+          <div class="gallery-card" onclick="openImageModal('assets/images/page-4.png', 'หน้า 4: Nielloware & Business Expertise')">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/page-4.png" alt="Nielloware Expertise" class="gallery-thumb">
+            </div>
+            <div class="gallery-card-info">
+              <span class="gallery-card-title">หน้า 4: ภูมิปัญญาเครื่องถม</span>
+              <span class="gallery-card-badge">CRAFTSMANSHIP</span>
+            </div>
+          </div>
+
+          <!-- Page 5 -->
+          <div class="gallery-card" onclick="openImageModal('assets/images/page-5.png', 'หน้า 5: Entrepreneurship Experience')">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/page-5.png" alt="Entrepreneurship" class="gallery-thumb">
+            </div>
+            <div class="gallery-card-info">
+              <span class="gallery-card-title">หน้า 5: ประสบการณ์ธุรกิจ</span>
+              <span class="gallery-card-badge">BUSINESS</span>
+            </div>
+          </div>
+
+          <!-- Page 6 -->
+          <div class="gallery-card" onclick="openImageModal('assets/images/page-6.png', 'หน้า 6: Activities & Sports Achievements')">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/page-6.png" alt="Activities & Sports" class="gallery-thumb">
+            </div>
+            <div class="gallery-card-info">
+              <span class="gallery-card-title">หน้า 6: กิจกรรม & กีฬา</span>
+              <span class="gallery-card-badge">SPORTS</span>
+            </div>
+          </div>
+
+          <!-- Page 7 -->
+          <div class="gallery-card" onclick="openImageModal('assets/images/page-7.png', 'หน้า 7: Experience in Pictures')">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/page-7.png" alt="Experience in Pictures" class="gallery-thumb">
+            </div>
+            <div class="gallery-card-info">
+              <span class="gallery-card-title">หน้า 7: ภาพกิจกรรมรวม</span>
+              <span class="gallery-card-badge">GALLERY</span>
+            </div>
+          </div>
+
+          <!-- Profile Photo -->
+          <div class="gallery-card" onclick="openImageModal('assets/images/profile.jpg', 'รูปถ่ายโปรไฟล์ คุณอัชญานีย์ เจียรศิริ')">
+            <div class="gallery-thumb-wrap">
+              <img src="assets/images/profile.jpg" alt="Profile Picture" class="gallery-thumb">
+            </div>
+            <div class="gallery-card-info">
+              <span class="gallery-card-title">รูปถ่ายโปรไฟล์</span>
+              <span class="gallery-card-badge">PORTRAIT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       LIGHTBOX MODAL (Full Resolution Image Inspector)
+       ========================================================= -->
+  <div id="image-modal" class="pixel-modal">
+    <div class="pixel-modal-content">
+      <div class="pixel-modal-header">
+        <span id="modal-title" class="modal-header-title">DOCUMENT PREVIEW</span>
+        <button id="modal-close-btn" class="modal-close-btn" title="Close">✕</button>
+      </div>
+      <div class="pixel-modal-body">
+        <img id="modal-img" src="" alt="Document Preview" class="modal-full-img">
+        <div class="modal-controls">
+          <button id="modal-prev-btn" class="modal-nav-btn">◄ หน้าก่อนหน้า</button>
+          <button id="modal-next-btn" class="modal-nav-btn">หน้าถัดไป ►</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       FOOTER (Fluid Width, Light Gray Background)
+       Requirement: footer fluid width เติมสีพื้นหลัง เทาอ่อน
+       ข้อความ: ระบบเว็บส่วนบุคคล พัฒนาโดย Achayanee Jeansiri
+       ========================================================= -->
+  <footer class="arcade-footer">
+    <div class="footer-inner-container">
+      <div class="footer-brand">
+        <span class="footer-pixel-logo">8-BIT</span>
+        <span class="footer-mandatory-text">
+          ระบบเว็บส่วนบุคคล พัฒนาโดย Achayanee Jeansiri
+        </span>
+      </div>
+      <div class="footer-extra-links">
+        <span class="footer-chip">KRU UTHAI NIELLOWARE</span>
+        <span class="footer-chip">RETRO ARCADE EDITION</span>
+        <span style="color: #6b7280;">© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
